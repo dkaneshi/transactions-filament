@@ -6,6 +6,7 @@ use App\Filament\Resources\AccountResource\Pages;
 use App\Filament\Resources\AccountResource\RelationManagers\DebitsRelationManager;
 use App\Filament\Resources\AccountResource\RelationManagers\DepositsRelationManager;
 use App\Models\Account;
+use App\Models\UserType;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
@@ -79,6 +80,10 @@ class AccountResource extends Resource
 
     public static function getEloquentQuery(): \Illuminate\Database\Eloquent\Builder
     {
-        return parent::getEloquentQuery()->where('user_id', auth()->id());
+        $query = parent::getEloquentQuery();
+        if (auth()->user()->user_type_id === UserType::where('name', 'admin')->first()->id) {
+            return $query;
+        }
+        return $query->where('user_id', '=',  auth()->id());
     }
 }

@@ -21,7 +21,7 @@ class AccountPolicy
      */
     public function view(User $user, Account $account): bool
     {
-        return $account->user_id === $user->id;
+        return $user->userType->name == 'admin' || $account->user_id === $user->id;
     }
 
     /**
@@ -29,7 +29,7 @@ class AccountPolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        return $user->userType->name === 'admin';
     }
 
     /**
@@ -37,7 +37,7 @@ class AccountPolicy
      */
     public function update(User $user, Account $account): bool
     {
-        return $account->user_id === $user->id;
+        return $user->userType->name === 'admin' || $account->user_id === $user->id;
     }
 
     /**
@@ -45,7 +45,7 @@ class AccountPolicy
      */
     public function delete(User $user, Account $account): bool
     {
-        return $account->user_id === $user->id;
+        return $user->userType->name === 'admin' || $account->user_id === $user->id;
     }
 
     /**
