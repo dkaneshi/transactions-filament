@@ -84,6 +84,7 @@ class AccountResource extends Resource
         if (auth()->user()->user_type_id === UserType::where('name', 'admin')->first()->id) {
             return $query;
         }
-        return $query->where('user_id', '=',  auth()->id());
+
+        return $query->where('user_id', '=', auth()->id());
     }
 }
