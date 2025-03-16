@@ -13,6 +13,7 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Illuminate\Database\Query\Builder;
 
 class AccountResource extends Resource
 {
@@ -75,5 +76,10 @@ class AccountResource extends Resource
             'create' => Pages\CreateAccount::route('/create'),
             'edit' => Pages\EditAccount::route('/{record}/edit'),
         ];
+    }
+
+    public static function getEloquentQuery(): \Illuminate\Database\Eloquent\Builder
+    {
+        return parent::getEloquentQuery()->where('user_id', auth()->id());
     }
 }
