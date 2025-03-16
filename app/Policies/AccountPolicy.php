@@ -5,6 +5,7 @@ namespace App\Policies;
 use App\Models\Account;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
+use Illuminate\Support\Facades\Auth;
 
 class AccountPolicy
 {
@@ -13,8 +14,7 @@ class AccountPolicy
      */
     public function viewAny(User $user): bool
     {
-//        return $account->user_id === $user->id;
-        return true;
+        return Auth::check();
     }
 
     /**
