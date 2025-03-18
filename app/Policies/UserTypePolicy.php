@@ -4,7 +4,6 @@ namespace App\Policies;
 
 use App\Models\User;
 use App\Models\UserType;
-use Illuminate\Auth\Access\Response;
 
 class UserTypePolicy
 {
@@ -13,7 +12,7 @@ class UserTypePolicy
      */
     public function viewAny(User $user): bool
     {
-        return  $user->userType->name == 'admin';
+        return $user->userType->name == 'admin';
     }
 
     /**
