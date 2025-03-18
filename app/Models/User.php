@@ -38,7 +38,7 @@ class User extends Authenticatable implements HasName
 
     public function getFilamentName(): string
     {
-        return 'Admin Admin';
+        return $this->first_name . ' ' . $this->last_name;
     }
 
     public function accounts(): HasMany

@@ -22,8 +22,16 @@ class UserResource extends Resource
     {
         return $form
             ->schema([
-                TextInput::make('name')
+                TextInput::make('first_name')
+                    ->maxLength(255)
                     ->required(),
+                TextInput::make('last_name')
+                    ->maxLength(255)
+                    ->required(),
+                TextInput::make('middle_name')
+                    ->maxLength(255),
+                TextInput::make('suffix')
+                    ->maxLength(255),
                 TextInput::make('email')
                     ->email()
                     ->required(),
@@ -32,7 +40,6 @@ class UserResource extends Resource
                     ->required(),
                 Select::make('user_type_id')
                     ->relationship('userType', 'name')
-                    ->searchable()
                     ->preload()
                     ->required(),
             ]);
@@ -42,8 +49,12 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('name'),
-                TextColumn::make('email'),
+                TextColumn::make('last_name')
+                    ->sortable(),
+                TextColumn::make('first_name')
+                    ->sortable(),
+                TextColumn::make('email')
+                    ->sortable(),
                 TextColumn::make('userType.name'),
             ])
             ->filters([

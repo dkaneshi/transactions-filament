@@ -20,7 +20,8 @@ return new class extends Migration
         });
 
         DB::table('users')->insert([
-            'name' => 'Admin',
+            'first_name' => 'Admin',
+            'last_name' => 'Admin',
             'email' => 'admin@example.com',
             'email_verified_at' => now(),
             'password' => Hash::make('adminpassword'),
@@ -31,7 +32,8 @@ return new class extends Migration
         ]);
 
         DB::table('users')->insert([
-            'name' => 'David K',
+            'first_name' => 'David',
+            'last_name' => 'K',
             'email' => 'david@example.com',
             'email_verified_at' => now(),
             'password' => Hash::make('davidpassword'),
@@ -42,7 +44,8 @@ return new class extends Migration
         ]);
 
         DB::table('users')->insert([
-            'name' => 'Sarah M',
+            'first_name' => 'Sarah',
+            'last_name' => 'M',
             'email' => 'sarah@example.com',
             'email_verified_at' => now(),
             'password' => Hash::make('sarahpassword'),

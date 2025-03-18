@@ -6,6 +6,7 @@ use App\Filament\Resources\AccountResource\Pages;
 use App\Filament\Resources\AccountResource\RelationManagers\DebitsRelationManager;
 use App\Filament\Resources\AccountResource\RelationManagers\DepositsRelationManager;
 use App\Models\Account;
+use App\Models\User;
 use App\Models\UserType;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
@@ -14,6 +15,8 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 
 class AccountResource extends Resource
 {
@@ -29,7 +32,14 @@ class AccountResource extends Resource
                     ->required()
                     ->maxLength(255),
                 Select::make('user_id')
-                    ->relationship('user', 'name')
+                    ->relationship(
+                        name: 'user',
+                        modifyQueryUsing: function (Builder $query) {
+                            $query->orderBy('last_name')->orderBy('first_name');
+                        })
+                    ->getOptionLabelFromRecordUsing(function (User $user) {
+                        return "{$user->last_name}, {$user->first_name}";
+                    })
                     ->searchable()
                     ->preload()
                     ->required(),
@@ -40,8 +50,11 @@ class AccountResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('user.name')
-                    ->label('Owner')
+                TextColumn::make('user.last_name')
+                    ->label('Owner Last Name')
+                    ->sortable(),
+                TextColumn::make('user.first_name')
+                    ->label('Owner First Name')
                     ->sortable(),
                 TextColumn::make('name')
                     ->sortable(),
