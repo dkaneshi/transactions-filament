@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\AccountResource\Pages;
 use App\Filament\Resources\AccountResource\RelationManagers\DebitsRelationManager;
 use App\Filament\Resources\AccountResource\RelationManagers\DepositsRelationManager;
+use App\Filament\Resources\AccountResource\Widgets\AccountBalanceWidget;
 use App\Models\Account;
 use App\Models\User;
 use App\Models\UserType;
@@ -79,6 +80,13 @@ class AccountResource extends Resource
         return [
             DepositsRelationManager::class,
             DebitsRelationManager::class,
+        ];
+    }
+
+    public static function getWidgets(): array
+    {
+        return [
+            AccountBalanceWidget::class,
         ];
     }
 
