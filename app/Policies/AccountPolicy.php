@@ -45,7 +45,7 @@ class AccountPolicy
      */
     public function delete(User $user, Account $account): bool
     {
-        return $user->userType->name === 'admin' || $account->user_id === $user->id;
+        return $user->userType->name === 'admin';
     }
 
     /**
