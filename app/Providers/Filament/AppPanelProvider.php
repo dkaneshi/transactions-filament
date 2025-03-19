@@ -27,6 +27,7 @@ class AppPanelProvider extends PanelProvider
             ->id('app')
             ->path('/')
             ->login()
+            ->brandName('Transactions-Filament')
             ->colors([
                 'primary' => Color::Amber,
             ])
