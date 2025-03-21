@@ -102,10 +102,10 @@ class AccountResource extends Resource
     public static function getEloquentQuery(): \Illuminate\Database\Eloquent\Builder
     {
         $query = parent::getEloquentQuery();
-        if (auth()->user()->user_type_id === UserType::where('name', 'admin')->first()->id) {
-            return $query;
+        if (auth()->user()->user_type_id === UserType::where('name', 'user')->first()->id) {
+            return $query->where('user_id', '=', auth()->id());
         }
 
-        return $query->where('user_id', '=', auth()->id());
+        return $query;
     }
 }
