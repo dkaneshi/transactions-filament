@@ -13,7 +13,7 @@ class AccountBalanceWidget extends BaseWidget
     protected function getStats(): array
     {
         return [
-            Stat::make('Account Balance', $this->record->balance)
+            Stat::make('Account Balance', $this->record->balance),
         ];
     }
 }
